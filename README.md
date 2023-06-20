@@ -14,3 +14,4 @@ Since I am a big fan of TDD, I will learn another course about Jest TDD/BDD and 
 - [Imooc course: Jest TDD/BDD](https://coding.imooc.com/learn/list/372.html)
 - [create-next-app vs create-react-app](https://zhuanlan.zhihu.com/p/349072762)
 - [Install Yarn](https://www.cnblogs.com/sunqq/p/10785445.html)
+- [React Browser Extension](https://react.dev/learn/react-developer-tools)
