@@ -1,8 +1,9 @@
 # Questions I have & Answer I figure out
 
 - [Adjacent JSX elements must be wrapped in an enclosing tag](#adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag)
+- [Spread syntax](#how-to-push-element-into-array-by-using-spread-syntax)
 
-## Adjacent JSX elements must be wrapped in an enclosing tag.
+### Adjacent JSX elements must be wrapped in an enclosing tag.
 In JSX syntax, we need provide an enclosing tag as a wrapper.
 <details>
     <summary>sample code</summary>
@@ -32,3 +33,50 @@ function App() {
 ```
 </details>
 
+### How to push element into array by using Spread syntax
+Refer to [MDN Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
+it can expand array.
+<details>
+    <summary>sample code</summary>
+
+    
+```javascript
+    const [list, setList] = useState(['学日语', '学React']);
+    // append new value into list, setList function is bound with const 'list'
+    setList(prevList => [...prevList, inputValue])
+```
+</details>
+
+### use Array.map to render, the bound onClick function is invoked immediately
+It is due to incorrect usage of event handler.  
+```javascript
+// CORRECT: no argument, bind function as event handler
+onClick = {functionA}
+// INCORRECT: assign one argument, it becomes run function
+onClick = {functionA(index)}
+// CORRECT: bind function within argument assignment
+onClick = {() => functionA(index)}
+```
+
+<details>
+    <summary>sample code</summary>
+
+```javascript
+    // incorrect, when bind event handler to onClick
+    // this experssion means, invoke handleItemDelete right now
+    {list.map((item, index) => (
+        <li key={index} onClick={handleItemDelete(index)}>
+            {item}
+        </li>
+    ))}
+
+
+    // correct
+    // when bind event handler to onClick, this experssion means, event handler will be invoking handleItemDelete 
+    {list.map((item, index) => (
+        <li key={index} onClick={() => handleItemDelete(index)}>
+            {item}
+        </li>
+    ))}
+```
+</details>
