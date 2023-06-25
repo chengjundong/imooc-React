@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import Button from "./Button";
+import TodoList from './TodoList'
 
 const root = ReactDOM.createRoot(document.querySelector('#root'));
 root.render(
+    // JSX，使用自定义标签引用组件，首字母大写
     <React.StrictMode>
-        <App/>
-        <Button/>
+        <TodoList/>
     </React.StrictMode>
 );
