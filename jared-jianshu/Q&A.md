@@ -2,6 +2,7 @@
 
 - [Adjacent JSX elements must be wrapped in an enclosing tag](#adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag)
 - [Spread syntax](#how-to-push-element-into-array-by-using-spread-syntax)
+- [Bind function](#use-arraymap-to-render-the-bound-onclick-function-is-invoked-immediately)
 
 ### Adjacent JSX elements must be wrapped in an enclosing tag.
 In JSX syntax, we need provide an enclosing tag as a wrapper.
@@ -78,5 +79,20 @@ onClick = {() => functionA(index)}
             {item}
         </li>
     ))}
+```
+</details>
+
+### import CSS into JS
+Under the help of React App Scaffolding, we are allowed to import CSS in JS and apply style
+on our elements.
+
+<details>
+    <summary>sample code</summary>
+
+```javascript
+import './style.css'
+
+{/* JSX code, we need to use "className" instead of "class" of HTML tag */}
+<input className="red" />
 ```
 </details>

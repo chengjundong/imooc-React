@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import './style.css';
 
 function TodoList() {
 
@@ -27,14 +28,22 @@ function TodoList() {
 
     return (
         <>
+            {/* input + button */}
             <div>
-                <input value={inputValue} onChange={handleInputChange}/>
+                {/* use keyword "htmlFor" instead of "for" of HTML tag */}
+                <label htmlFor={'valueInput'}>输入内容</label>
+                {/* in React, we need use "className" to replace keyword "class" in normal HTML tag */}
+                <input id={'valueInput'} className={'input'} value={inputValue} onChange={handleInputChange}/>
                 <button onClick={handleBtnClick}>提交</button>
             </div>
+            {/* return a list of unsorted items, iterate const list */}
             <ul>
                 {
                     list.map((item, index) => {
-                        return <li key={index} onClick={() => handleItemDelete(this, index)}>{item}</li>
+                        // notice, onClick event handler, needs to use function, instead of invocation, because we assign parameter at here
+                        return <li key={index}
+                                   onClick={() => handleItemDelete(this, index)}
+                                   dangerouslySetInnerHTML={{__html: item}} ></li>
                     })
                 }
             </ul>
