@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import './style.css';
+import TodoItem from "./TodoItem";
 
 function TodoList() {
 
@@ -21,7 +22,7 @@ function TodoList() {
     }
 
     // delete item from list
-    const handleItemDelete = (e, index) => {
+    const handleItemDelete = (index) => {
         const updatedList = list.filter((_, i) => i !== index);
         setList(updatedList);
     }
@@ -40,10 +41,8 @@ function TodoList() {
             <ul>
                 {
                     list.map((item, index) => {
-                        // notice, onClick event handler, needs to use function, instead of invocation, because we assign parameter at here
-                        return <li key={index}
-                                   onClick={() => handleItemDelete(this, index)}
-                                   dangerouslySetInnerHTML={{__html: item}} ></li>
+                        // notice, pass function-with-arguments, need to use expression {() => f(a,b)}
+                        return <TodoItem key={item} itemValue={item} itemIndex={index} onDelete={() => handleItemDelete(index)}/>;
                     })
                 }
             </ul>
