@@ -1,13 +1,9 @@
 import React from "react";
 
 export default function TodoItem({itemValue, itemIndex, onDelete}) {
-    function handleDelete() {
-        onDelete(itemIndex)
-    }
-
     return (
         <>
-            <li key={itemIndex} onClick={handleDelete}>
+            <li key={itemIndex} onClick={() => onDelete(itemIndex)}>
                 {itemValue}
             </li>
         </>

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import './style.css';
 import TodoItem from "./TodoItem";
+import TodoInput from "./TodoInput";
 
 function TodoList() {
 
@@ -30,19 +31,14 @@ function TodoList() {
     return (
         <>
             {/* input + button */}
-            <div>
-                {/* use keyword "htmlFor" instead of "for" of HTML tag */}
-                <label htmlFor={'valueInput'}>输入内容</label>
-                {/* in React, we need use "className" to replace keyword "class" in normal HTML tag */}
-                <input id={'valueInput'} className={'input'} value={inputValue} onChange={handleInputChange}/>
-                <button onClick={handleBtnClick}>提交</button>
-            </div>
+            <TodoInput inputValue={inputValue} handleBtnClick={handleBtnClick} handleInputChange={handleInputChange}/>
             {/* return a list of unsorted items, iterate const list */}
             <ul>
                 {
                     list.map((item, index) => {
                         // notice, pass function-with-arguments, need to use expression {() => f(a,b)}
-                        return <TodoItem key={item} itemValue={item} itemIndex={index} onDelete={() => handleItemDelete(index)}/>;
+                        return <TodoItem key={item} itemValue={item} itemIndex={index}
+                                         onDelete={() => handleItemDelete(index)}/>;
                     })
                 }
             </ul>

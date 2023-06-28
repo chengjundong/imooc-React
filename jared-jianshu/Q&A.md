@@ -3,6 +3,8 @@
 - [Adjacent JSX elements must be wrapped in an enclosing tag](#adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag)
 - [Spread syntax](#how-to-push-element-into-array-by-using-spread-syntax)
 - [Bind function](#use-arraymap-to-render-the-bound-onclick-function-is-invoked-immediately)
+- [import CSS into JS](#import-css-into-js)
+- [Communication between components in React only](#communication-between-components-in-react-only)
 
 ### Adjacent JSX elements must be wrapped in an enclosing tag.
 In JSX syntax, we need provide an enclosing tag as a wrapper.
@@ -96,3 +98,11 @@ import './style.css'
 <input className="red" />
 ```
 </details>
+
+### Communication between components in React only
+1. import component A into component B, so B is parent of A
+2. B could pass variable objects, function objects to A
+3. A could read variable objects, invoke function, but A CAN NOT change them. Pass-in objects are read-only (one-way data flow)
+4. A could invoke a function of B to change variable of B 
+
+__React is a view framework, it is not very easy to handle data (pass/change) in it. So, we will need other data framework to help.__
