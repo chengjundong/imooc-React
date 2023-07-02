@@ -5,6 +5,8 @@
 - [Bind function](#use-arraymap-to-render-the-bound-onclick-function-is-invoked-immediately)
 - [import CSS into JS](#import-css-into-js)
 - [Communication between components in React only](#communication-between-components-in-react-only)
+- [Why directly operating DOM in JS costs so much?](#why-directly-operating-dom-in-js-costs-so-much)
+- [Diff algorithm in virtualDOM](#diff-algorithm-in-virtualdom-comparison)
 
 ### Adjacent JSX elements must be wrapped in an enclosing tag.
 In JSX syntax, we need provide an enclosing tag as a wrapper.
@@ -106,3 +108,18 @@ import './style.css'
 4. A could invoke a function of B to change variable of B 
 
 __React is a view framework, it is not very easy to handle data (pass/change) in it. So, we will need other data framework to help.__
+
+### Why directly operating DOM in JS costs so much?
+Operating on the DOM (Document Object Model) directly in JavaScript can be resource-intensive and slow, especially when dealing with complex and dynamic web applications. Here are a few reasons why manipulating the DOM directly can be costly:
+
+1. __Performance:__ The DOM is a tree-like representation of the HTML structure of a web page. When you modify the DOM, the browser has to recalculate the layout, repaint the affected elements, and trigger reflows. These operations can be computationally expensive, especially when making frequent or extensive changes to the DOM.
+2. __Repaints and Reflows:__ Manipulating the DOM can trigger repaints and reflows, which involve recalculating the positions and styles of elements on the page. Repaints and reflows are expensive operations and can lead to visual artifacts or a perceived slowdown in the user interface.
+3. __Limited Batch Operations:__ When you directly manipulate the DOM in JavaScript, each modification is typically performed individually, requiring multiple updates to the underlying DOM structure. This can be inefficient compared to performing batch operations where multiple changes are made together.
+
+### Diff algorithm in virtualDOM comparison
+1. compare two virtualDOM tree per level
+2. once diff found in level X, comparison done, won't go to next level like level X+1
+3. use new.levelX (along with all child nodes) to replace old.levelX
+
+We can give a value to component.key, so we can index them and accelerate comparison efficiency.  
+That is why we don't suggest to use index as value of key, index is not fixed and can be changed after re-render.
