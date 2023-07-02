@@ -1,15 +1,17 @@
 import React from "react";
 
-export default function TodoItem({itemValue, itemIndex, onDelete}) {
+/**
+ * Item component in To DO list
+ *
+ * @param props itemIndex, itemValue, handleDelete
+ * @returns an item of list, contains input value and is bound with delete function on `onClick` event
+ * @constructor
+ */
+export default function TodoItem(props) {
     function handleDelete() {
-        onDelete(itemIndex)
+        props.onDelete(props.itemIndex)
     }
 
-    return (
-        <>
-            <li key={itemIndex} onClick={handleDelete}>
-                {itemValue}
-            </li>
-        </>
-    );
+    // instead of JSX, we could use React API to create virtual DOM (JSX will use it as well)
+    return React.createElement('li', {key: props.itemValue, onClick: handleDelete}, props.itemValue);
 };
