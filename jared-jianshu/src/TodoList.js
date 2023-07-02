@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './style.css';
 import TodoItem from "./TodoItem";
 import TodoInput from "./TodoInput";
@@ -21,6 +21,17 @@ function TodoList() {
             setInputValue('');
         }
     }
+
+    /**
+     * bind callback on list, once list is updated, print a log
+     */
+    useEffect(() => {
+        const report = () => {
+            console.log("list updated")
+        };
+
+        report();
+    }, [list]);
 
     // delete item from list
     const handleItemDelete = (index) => {
