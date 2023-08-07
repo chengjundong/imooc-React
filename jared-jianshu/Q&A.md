@@ -123,3 +123,67 @@ Operating on the DOM (Document Object Model) directly in JavaScript can be resou
 
 We can give a value to component.key, so we can index them and accelerate comparison efficiency.  
 That is why we don't suggest to use index as value of key, index is not fixed and can be changed after re-render.
+
+### Class Component lifecycle functions
+Lifecycle functions are a set of functions which will be invoked by React framework automatically.
+#### 1.Mounting Phase
+- constructor(): This is the constructor function for the component. It's called when the component is created.
+- componentWillMount(): Deprecated as of React 16.3. It was called just before the component was inserted into the DOM. Avoid using this.
+- render(): This function renders the component's JSX and returns the elements that should be displayed on the screen.
+- componentDidMount(): This function is called after the component has been rendered and added to the DOM. It's often used for initial data fetching and setup.
+#### 2.Updating Phase
+- componentWillReceiveProps(nextProps): Deprecated as of React 16.3. It was called when the component was about to receive new props. Use getDerivedStateFromProps() or update the state directly from componentDidUpdate() instead.
+- shouldComponentUpdate(nextProps, nextState): This function determines whether the component should re-render or not based on the changes in props or state.
+- componentWillUpdate(nextProps, nextState): Deprecated as of React 16.3. It was called just before the component was re-rendered due to changes in props or state.
+- render(): Re-renders the component when necessary.
+- componentDidUpdate(prevProps, prevState): This function is called after the component has been updated and re-rendered. It's often used for additional data fetching or DOM updates.
+#### 3.Unmounting Phase:
+- componentWillUnmount(): This function is called before the component is removed from the DOM. It's commonly used for cleanup tasks like cancelling timers or clearing subscriptions.
+#### 4.Error Handling
+- componentDidCatch(error, info): This function is used for error boundary handling. It's called when an error is thrown during rendering.
+
+### Function Component lifecycle functions
+Compare to class component, function component also has its lifecyle functions implemented by hook.
+#### 1.Mounting and Updating
+- useEffect(): This hook replaces the functionality of componentDidMount, componentDidUpdate, and componentWillUnmount in function components. It allows you to perform side effects (e.g., data fetching, DOM manipulation) after rendering. You can specify dependencies to control when the effect is triggered.
+#### 2.State and Props
+- useState(): This hook enables functional components to manage state, similar to how this.state is used in class components.
+- useMemo(): This hook is used to memoize the result of a computation, optimizing performance by preventing unnecessary re-computation when dependencies haven't changed.
+- useCallback(): This hook memoizes functions, useful when you want to prevent unnecessary function re-creations on each render.
+#### 3.Context
+- useContext(): This hook allows functional components to consume context values provided by parent components.
+#### 4.Error Handling
+- useErrorBoundary(): While there's no direct equivalent hook for error handling, you can use the ErrorBoundary component to catch errors within a specific component tree.
+
+<details>
+    <summary>sample code to leverage 'useEffect()' to mimic `componentDidMount()`</summary>
+
+```jsx
+import React, { useEffect, useState } from 'react';
+
+function ExampleComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // This code will run after the component renders (componentDidMount)
+    fetchData().then(response => {
+      setData(response);
+    });
+
+    return () => {
+      // This cleanup code will run before the component unmounts (componentWillUnmount)
+      cleanup();
+    };
+  }, []); // Empty dependency array means the effect runs only once (on mount)
+
+  return (
+    <div>
+      {/* Render component content */}
+    </div>
+  );
+}
+
+export default ExampleComponent;
+
+```
+</details>
