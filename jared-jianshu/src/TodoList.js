@@ -39,6 +39,7 @@ function TodoList() {
         setList(updatedList);
     }
 
+    // JSX to render component
     return (
         <>
             {/* input + button */}

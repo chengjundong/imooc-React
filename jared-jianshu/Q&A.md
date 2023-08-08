@@ -145,11 +145,12 @@ Lifecycle functions are a set of functions which will be invoked by React framew
 ### Function Component lifecycle functions
 Compare to class component, function component also has its lifecyle functions implemented by hook.
 #### 1.Mounting and Updating
-- useEffect(): This hook replaces the functionality of componentDidMount, componentDidUpdate, and componentWillUnmount in function components. It allows you to perform side effects (e.g., data fetching, DOM manipulation) after rendering. You can specify dependencies to control when the effect is triggered.
+- useEffect(): This hook replaces the functionality of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` in function components. It allows you to perform side effects (e.g., data fetching, DOM manipulation) after rendering. You can specify dependencies to control when the effect is triggered.
 #### 2.State and Props
 - useState(): This hook enables functional components to manage state, similar to how this.state is used in class components.
-- useMemo(): This hook is used to memoize the result of a computation, optimizing performance by preventing unnecessary re-computation when dependencies haven't changed.
+- useMemo(): To replace `shouldComponentUpdate`, this hook is used to memoize the result of a computation, optimizing performance by preventing unnecessary re-computation when dependencies haven't changed.
 - useCallback(): This hook memoizes functions, useful when you want to prevent unnecessary function re-creations on each render.
+- JSX to replace `render()`, like `return (<><input id={a.value} /></>)`
 #### 3.Context
 - useContext(): This hook allows functional components to consume context values provided by parent components.
 #### 4.Error Handling

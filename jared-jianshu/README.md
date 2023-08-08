@@ -27,6 +27,12 @@ Virtual DOM is a JS object to describe HTML DOM. We can compare two Virtual DOM 
 It saves effort of creating a new DOM, replacing the existing DOM and comparing between real DOM.  
 It can help React to develop Native app. In IOS/Android, we can convert virtualDOM to native component.
 
+## Development
+### How to debug
+1. start React app
+2. create a Javascript Debug configuration in Webstorm
+3. start Javascript Debug configuration & add breakpoint
+
 ## Links
 - [React 18.2.0](https://react.dev/)
 - [Imooc course link](https://coding.imooc.com/learn/list/229.html)
