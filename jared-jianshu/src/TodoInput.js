@@ -14,4 +14,6 @@ function TodoInput({inputValue, handleInputChange, handleBtnClick}) {
     );
 }
 
-export default TodoInput;
+const MemoizedTodoInput = React.memo(TodoInput);
+
+export default MemoizedTodoInput;

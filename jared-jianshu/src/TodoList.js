@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './style.css';
-import TodoItem from "./TodoItem";
-import TodoInput from "./TodoInput";
+import MemoizedTodoItem from "./TodoItem";
+import MemoizedTodoInput from "./TodoInput";
 
 function TodoList() {
 
@@ -43,13 +43,13 @@ function TodoList() {
     return (
         <>
             {/* input + button */}
-            <TodoInput inputValue={inputValue} handleBtnClick={handleBtnClick} handleInputChange={handleInputChange}/>
+            <MemoizedTodoInput inputValue={inputValue} handleBtnClick={handleBtnClick} handleInputChange={handleInputChange}/>
             {/* return a list of unsorted items, iterate const list */}
             <ul>
                 {
                     list.map((item, index) => {
                         // notice, pass function-with-arguments, need to use expression {() => f(a,b)}
-                        return <TodoItem key={item} itemValue={item} itemIndex={index}
+                        return <MemoizedTodoItem key={item} itemValue={item} itemIndex={index}
                                          onDelete={() => handleItemDelete(index)}/>;
                     })
                 }

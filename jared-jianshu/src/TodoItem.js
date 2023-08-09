@@ -9,15 +9,22 @@ import React from "react";
  * @returns an item of list, contains input value and is bound with delete function on `onClick` event
  * @constructor
  */
-export default function TodoItem({ itemValue, itemIndex, onDelete }) {
+function TodoItem({ itemValue, itemIndex, onDelete }) {
+
     const handleDelete = () => {
         onDelete(itemIndex);
     };
 
     // JSX to render component
     return (
-        <li key={itemValue} onClick={handleDelete}>
-            {itemValue}
-        </li>
-    );
-};
+        <>
+            <li key={itemValue} onClick={handleDelete}>
+                {itemValue}
+            </li>
+        </>
+    )
+}
+
+const MemoizedTodoItem = React.memo(TodoItem);
+
+export default MemoizedTodoItem;
