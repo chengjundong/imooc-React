@@ -7,6 +7,9 @@
 - [Communication between components in React only](#communication-between-components-in-react-only)
 - [Why directly operating DOM in JS costs so much?](#why-directly-operating-dom-in-js-costs-so-much)
 - [Diff algorithm in virtualDOM](#diff-algorithm-in-virtualdom-comparison)
+- [Class component lifecycle](#class-component-lifecycle)
+- [Function component lifecycle](#function-component-lifecycle)
+- [UseEffect is executed multiple times](#useeffect-executed-multiple-times)
 
 ### Adjacent JSX elements must be wrapped in an enclosing tag.
 In JSX syntax, we need provide an enclosing tag as a wrapper.
@@ -124,7 +127,7 @@ Operating on the DOM (Document Object Model) directly in JavaScript can be resou
 We can give a value to component.key, so we can index them and accelerate comparison efficiency.  
 That is why we don't suggest to use index as value of key, index is not fixed and can be changed after re-render.
 
-### Class Component lifecycle functions
+### Class Component lifecycle
 Lifecycle functions are a set of functions which will be invoked by React framework automatically.
 #### 1.Mounting Phase
 - constructor(): This is the constructor function for the component. It's called when the component is created.
@@ -142,7 +145,7 @@ Lifecycle functions are a set of functions which will be invoked by React framew
 #### 4.Error Handling
 - componentDidCatch(error, info): This function is used for error boundary handling. It's called when an error is thrown during rendering.
 
-### Function Component lifecycle functions
+### Function Component lifecycle
 Compare to class component, function component also has its lifecyle functions implemented by hook.
 #### 1.Mounting and Updating
 - useEffect(): This hook replaces the functionality of `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount` in function components. It allows you to perform side effects (e.g., data fetching, DOM manipulation) after rendering. You can specify dependencies to control when the effect is triggered.
@@ -186,5 +189,42 @@ function ExampleComponent() {
 
 export default ExampleComponent;
 
+```
+</details>
+
+### useEffect executed multiple times
+Here was my experience that `useEffect` is executed multiple times.
+<details>
+    <summary>sample code to compare `useEffect` execution</summary>
+
+```javascript
+// list to include todo items
+const [list, setList] = useState([]);
+
+// CORRECT: execute only once
+useEffect(() => {
+    axios.get("/todoItems")
+        .then((resp) => {
+            if (resp.data) {
+                setList(resp.data);
+            }
+        })
+    return null;
+}, []);
+
+// WRONG: execute multiple times
+useEffect(() => {
+    axios.get("/todoItems")
+        .then((resp) => {
+            if (resp.data) {
+                // for loop & item append, could cause state change multiple times
+                // even we set the dependencies are empty, the useEffect function is still executed multiple times
+                for(let i=0; i<resp.data.length; i++) {
+                    setList(prevList => [...prevList, resp.data[i]]);
+                }
+            }
+        })
+    return null;
+}, []);
 ```
 </details>

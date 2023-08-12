@@ -2,11 +2,29 @@ import React, {useState, useEffect} from "react";
 import './style.css';
 import TodoItem from "./TodoItem";
 import TodoInput from "./TodoInput";
+import axios from "axios";
 
 function TodoList() {
 
     const [inputValue, setInputValue] = useState('');
-    const [list, setList] = useState(['学日语', '学React']);
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://773ec25f-c135-4250-9bd4-517cb2ad3145.mock.pstmn.io/todoItems")
+            .then((resp) => {
+                if (resp.data) {
+                    setList(resp.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+            .finally(() => {})
+
+        return () => {
+            console.log("component will unmount...")
+        };
+    }, []);
 
     // change the value of state "inputValue"
     const handleInputChange = (e) => {
@@ -21,17 +39,6 @@ function TodoList() {
             setInputValue('');
         }
     }
-
-    /**
-     * bind callback on list, once list is updated, print a log
-     */
-    useEffect(() => {
-        const report = () => {
-            console.log("list updated")
-        };
-
-        report();
-    }, [list]);
 
     // delete item from list
     const handleItemDelete = (index) => {
