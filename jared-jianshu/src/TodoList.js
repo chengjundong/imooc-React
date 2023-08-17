@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './style.css';
-import TodoItem from "./TodoItem";
-import TodoInput from "./TodoInput";
+import MemoizedTodoItem from "./TodoItem";
+import MemoizedTodoInput from "./TodoInput";
 import axios from "axios";
 
 function TodoList() {
