@@ -1,18 +1,22 @@
-import {useState} from "react";
-import './style.css';
+import {useState, useRef} from "react";
+import './transition.css';
+import {CSSTransition} from "react-transition-group";
 
 export default function ToggleText() {
 
-    const show = 1;
-    const hide = 0;
-    const [textClass, setTextClass] = useState(hide);
+    const [textClass, setTextClass] = useState(false);
+    const nodeRef = useRef(null);
 
     return (
         <>
-            <div id={"toggleText"} className={textClass === show ? "show" : "hide"}>喜欢宝宝！</div>
-            <button onClick={() => {
-                setTextClass(textClass === show ? hide : show);
-            }}>宝宝点我</button>
+            <CSSTransition in={textClass} nodeRef={nodeRef} timeout={2000} classNames="toggle-text"
+                           onExited={() => console.log("不想和宝宝分开")}
+            >
+                <div id={"toggleText"} ref={nodeRef}>
+                    {"喜欢宝宝！"}
+                </div>
+            </CSSTransition>
+            <button onClick={() => setTextClass(textClass !== true)}>宝宝点我</button>
         </>
     );
 }

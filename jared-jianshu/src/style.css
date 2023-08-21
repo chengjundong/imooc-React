@@ -2,26 +2,31 @@
     border: 1px solid red;
 }
 
-#toggleText.show {
-    animation: show-transition 2s ease-in forwards;
-}
-
-#toggleText.hide {
+.toggle-text-enter {
     opacity: 0;
-    transition: all 1s ease-in;
+    color: gray;
 }
 
-@keyframes show-transition {
-    0% {
-        opacity: 0;
-        color: gray;
-    }
-    50% {
-        opacity: 0.5;
-        color: aqua;
-    }
-    100% {
-        opacity: 1;
-        color: blue;
-    }
+.toggle-text-enter-active {
+    opacity: 1;
+    transition: opacity 2s;
+}
+
+.toggle-text-enter-done {
+    opacity: 1;
+}
+
+.my-node-enter {
+    opacity: 0;
+}
+.my-node-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+}
+.my-node-exit {
+    opacity: 1;
+}
+.my-node-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
 }

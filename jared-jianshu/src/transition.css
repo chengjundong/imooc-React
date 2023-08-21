@@ -1,0 +1,31 @@
+/* enter animation */
+.toggle-text-enter {
+    opacity: 0;
+}
+
+.toggle-text-enter-active {
+    opacity: 1;
+    color: yellowgreen;
+    transition: opacity 2s ease-in;
+}
+
+.toggle-text-enter-done {
+    opacity: 1;
+    color: yellowgreen;
+}
+
+/* exit animation */
+.toggle-text-exit {
+    opacity: 0;
+}
+
+.toggle-text-exit-active {
+    opacity: 1;
+    color: red;
+    transition: opacity 2s ease-in;
+}
+
+.toggle-text-exit-done {
+    opacity: 1;
+    color: red;
+}
